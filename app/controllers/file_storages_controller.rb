@@ -34,3 +34,13 @@ class FileStoragesController < ApplicationController
     params.require(:file_storage).permit(:name, :attachment, :user_id)   
   end   
 end
+
+def delete_by_author(current_user)
+  if self.user == current_user
+    self.remove_attachment!
+    self.destroy
+  else
+    return false
+  end
+end
+end
